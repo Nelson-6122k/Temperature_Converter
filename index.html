@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="temperatureApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Temperature Conversion</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="converter" ng-controller="TemperatureController as tempCtrl">
+    <h2>Temperature Conversion</h2>
+
+    <label>
+        Celsius:
+        <input type="number" ng-model="tempCtrl.celsius" ng-change="tempCtrl.convertCtoF()">
+    </label>
+    &nbsp;&nbsp;&nbsp;
+    <label>
+        Fahrenheit:
+        <input type="number" ng-model="tempCtrl.fahrenheit" ng-change="tempCtrl.convertFtoC()">
+    </label>
+
+    <p class="box">{{ tempCtrl.result }}</p>
+</div>
+
+<script>
+    var app = angular.module('temperatureApp', []);
+
+    app.controller('TemperatureController', function () {
+        this.celsius = 0;
+        this.fahrenheit = 32;
+        this.result = this.celsius + "°C is " + this.fahrenheit + "°F";
+
+        this.convertCtoF = function () {
+            this.fahrenheit = (this.celsius * 9/5) + 32;
+            this.result = this.celsius + "°C is " + this.fahrenheit + "°F";
+        };
+
+        this.convertFtoC = function () {
+            this.celsius = (this.fahrenheit - 32) * 5/9;
+            this.result = this.fahrenheit + "°F is " + this.celsius + "°C";
+        };
+    });
+</script>
+
+</body>
+</html>
